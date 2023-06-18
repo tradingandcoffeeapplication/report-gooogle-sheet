@@ -1,0 +1,112 @@
+
+// this is the updated code for google sheets app script -> just need to change URL
+
+function sendEmail(){
+  var userEmail = SpreadsheetApp.getActive().getSheetByName("REPORT").getRange('AI2').getValue();
+  if(userEmail == "sent") return;
+  email(userEmail);
+}
+
+function email(userEmail){
+  if(userEmail == "sent") return;
+  Utilities.sleep(1000);
+  SpreadsheetApp.getActive().getSheetByName("REPORT").getRange('AJ3').setValue('=SUM(R:R)');
+  SpreadsheetApp.getActive().getSheetByName("REPORT").getRange('AK3').setValue('=AH2+AJ3');
+  SpreadsheetApp.getActive().getSheetByName("REPORT").getRange('AL3').setValue('=(AJ3/AH2)*1').setNumberFormat("00.00%");
+  SpreadsheetApp.getActive().getSheetByName("REPORT").getRange('AJ6').setValue('=AVERAGE(G:G)').setNumberFormat("hh:mm");
+  SpreadsheetApp.getActive().getSheetByName("REPORT").getRange('AK6').setValue('=IFERROR(AVERAGEIFS(G:G,R:R,">0"),0)').setNumberFormat("hh:mm");
+  SpreadsheetApp.getActive().getSheetByName("REPORT").getRange('AL6').setValue('=IFERROR(AVERAGEIFS(G:G,R:R,"<0"),0)').setNumberFormat("hh:mm");
+  SpreadsheetApp.getActive().getSheetByName("REPORT").getRange('AL8').setValue('=AJ12/AK10*1').setNumberFormat("##.##%");
+  SpreadsheetApp.getActive().getSheetByName("REPORT").getRange('AJ8').setValue('=1-AL8').setNumberFormat("##.##%");
+  SpreadsheetApp.getActive().getSheetByName("REPORT").getRange('AJ10').setValue('=MAX(O:O)').setNumberFormat("00.00%");
+  SpreadsheetApp.getActive().getSheetByName("REPORT").getRange('AK10').setValue('=COUNTA(A:A)-1').setNumberFormat("0");
+  SpreadsheetApp.getActive().getSheetByName("REPORT").getRange('AL10').setValue('=MIN(O:O)').setNumberFormat("00.00%");
+  SpreadsheetApp.getActive().getSheetByName("REPORT").getRange('AJ12').setValue('=COUNTIF(R:R,AN14)');
+  SpreadsheetApp.getActive().getSheetByName("REPORT").getRange('AK12').setValue('=COUNTIF(R:R,AN13)');
+  SpreadsheetApp.getActive().getSheetByName("REPORT").getRange('AL12').setValue('=(AK10-AK12)-AJ12').setNumberFormat("0");
+  SpreadsheetApp.getActive().getSheetByName("REPORT").getRange('AJ14:AL14').setValue('=AH2');
+  SpreadsheetApp.getActive().getSheetByName("REPORT").getRange('AJ17').setValue('=(SUM(L:L))/AK10');
+  SpreadsheetApp.getActive().getSheetByName("REPORT").getRange('AK17').setValue('=AVERAGEIF(O:O,AN13,L:L)');
+  SpreadsheetApp.getActive().getSheetByName("REPORT").getRange('AL17').setValue('=AVERAGEIF(O:O,AN14,L:L)');
+  SpreadsheetApp.getActive().getSheetByName("REPORT").getRange('AJ19').setValue('=IFERROR(AVERAGEIF(R:R,AN13,R:R),0)');
+  SpreadsheetApp.getActive().getSheetByName("REPORT").getRange('AK19').setValue('=AVERAGEIF(P:P,AN13,P:P)');
+  SpreadsheetApp.getActive().getSheetByName("REPORT").getRange('AL19').setValue('=IFERROR(AVERAGEIF(P:P,AN14,P:P),0)');
+  SpreadsheetApp.getActive().getSheetByName("REPORT").getRange('AN13').setValue('>0');
+  SpreadsheetApp.getActive().getSheetByName("REPORT").getRange('AN14').setValue('<0');
+  SpreadsheetApp.getActive().getSheetByName("REPORT").getRange('AN15').setValue('0');
+
+var sheet = SpreadsheetApp.getActiveSpreadsheet();
+var filename = "All Positions Report";
+var MyNewBook = sheet.copy(filename).addViewer(userEmail).getUrl();
+
+Utilities.sleep(1000);
+
+sendLink();
+
+Utilities.sleep(1000);
+
+  MailApp.sendEmail({
+  to: userEmail,
+  subject: 'Trading and Coffee Signals Report',
+  body: 'your Last Positions: ' + MyNewBook,
+});
+
+  MailApp.sendEmail({
+  to: 'tradingandcoffeeapplication@gmail.com',
+  subject: 'Trading and Coffee Signals Report',
+  body: userEmail + ' Last Positions: ' + MyNewBook,
+});
+
+Utilities.sleep(1000);
+
+var rangeForDelete = SpreadsheetApp
+               .getActive()
+               .getSheetByName("REPORT")
+               .getRange('A2:AH300');
+ rangeForDelete.clearContent();
+
+Utilities.sleep(1000);
+
+var rangeForDelete = SpreadsheetApp
+               .getActive()
+               .getSheetByName("REPORT")
+               .getRange('A200:AH600');
+ rangeForDelete.clearContent();
+
+SpreadsheetApp.getActiveSheet().getRange('AI2').setValue('sent');
+}
+
+function sendLink(){
+
+var sheet = SpreadsheetApp.getActiveSpreadsheet();
+var filename = "All Positions Report";
+const userEmail = SpreadsheetApp.getActive().getSheetByName("REPORT").getRange('AI2').getValue();
+var MyNewBook = sheet.copy(filename).addViewer(userEmail).getUrl();
+
+if(userEmail == "sent") return;
+
+var url = 'https://empty-cameras-watch.loca.lt/reports/savelink';
+
+var jsonData = {
+  "userEmail": userEmail,
+  "link": MyNewBook
+};
+
+var payload = JSON.stringify(jsonData);
+
+var options = {
+  'method' : 'post',
+  'contentType': 'application/json',
+  'payload' : payload
+};
+
+var response = UrlFetchApp.fetch(url, options);
+// Logger.log(response.getContentText());
+}
+
+function doSomethings() {
+  const userEmail = SpreadsheetApp.getActive().getSheetByName("REPORT").getRange('AI2').getValue();
+  if(userEmail == "sent") return;
+  sendEmail();
+}
+
