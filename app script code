@@ -1,12 +1,14 @@
 
 // this is the updated code for google sheets app script -> just need to change URL
 
+// this will send email to user when 'AI2' field is change
 function sendEmail(){
   var userEmail = SpreadsheetApp.getActive().getSheetByName("REPORT").getRange('AI2').getValue();
   if(userEmail == "sent") return;
   email(userEmail);
 }
 
+// update the statistics part + send link to mongo + send 1 enail to user and 1 email copy to tradindandcofeeapplication + when finish will clear all data from table
 function email(userEmail){
   if(userEmail == "sent") return;
   Utilities.sleep(1000);
@@ -76,6 +78,7 @@ var rangeForDelete = SpreadsheetApp
 SpreadsheetApp.getActiveSheet().getRange('AI2').setValue('sent');
 }
 
+// this will send the user email + link to mongo server
 function sendLink(){
 
 var sheet = SpreadsheetApp.getActiveSpreadsheet();
@@ -104,6 +107,7 @@ var response = UrlFetchApp.fetch(url, options);
 // Logger.log(response.getContentText());
 }
 
+// this is the name of google sheets trigger every time there is change in 'AI2' field the trigger will execute the 'doSomethings()' function
 function doSomethings() {
   const userEmail = SpreadsheetApp.getActive().getSheetByName("REPORT").getRange('AI2').getValue();
   if(userEmail == "sent") return;
