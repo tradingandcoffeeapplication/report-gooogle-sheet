@@ -12,30 +12,30 @@ function sendEmail(){
 function email(userEmail){
   if(userEmail == "sent") return;
   Utilities.sleep(1000);
-  SpreadsheetApp.getActive().getSheetByName("REPORT").getRange('AJ3').setValue('=SUM(R:R)');
-  SpreadsheetApp.getActive().getSheetByName("REPORT").getRange('AK3').setValue('=AH2+AJ3');
-  SpreadsheetApp.getActive().getSheetByName("REPORT").getRange('AL3').setValue('=(AJ3/AH2)*1').setNumberFormat("00.00%");
-  SpreadsheetApp.getActive().getSheetByName("REPORT").getRange('AJ6').setValue('=AVERAGE(G:G)').setNumberFormat("hh:mm");
-  SpreadsheetApp.getActive().getSheetByName("REPORT").getRange('AK6').setValue('=IFERROR(AVERAGEIFS(G:G,R:R,">0"),0)').setNumberFormat("hh:mm");
-  SpreadsheetApp.getActive().getSheetByName("REPORT").getRange('AL6').setValue('=IFERROR(AVERAGEIFS(G:G,R:R,"<0"),0)').setNumberFormat("hh:mm");
-  SpreadsheetApp.getActive().getSheetByName("REPORT").getRange('AL8').setValue('=AJ12/AK10*1').setNumberFormat("##.##%");
-  SpreadsheetApp.getActive().getSheetByName("REPORT").getRange('AJ8').setValue('=1-AL8').setNumberFormat("##.##%");
-  SpreadsheetApp.getActive().getSheetByName("REPORT").getRange('AJ10').setValue('=MAX(O:O)').setNumberFormat("00.00%");
-  SpreadsheetApp.getActive().getSheetByName("REPORT").getRange('AK10').setValue('=COUNTA(A:A)-1').setNumberFormat("0");
-  SpreadsheetApp.getActive().getSheetByName("REPORT").getRange('AL10').setValue('=MIN(O:O)').setNumberFormat("00.00%");
-  SpreadsheetApp.getActive().getSheetByName("REPORT").getRange('AJ12').setValue('=COUNTIF(R:R,AN14)');
-  SpreadsheetApp.getActive().getSheetByName("REPORT").getRange('AK12').setValue('=COUNTIF(R:R,AN13)');
-  SpreadsheetApp.getActive().getSheetByName("REPORT").getRange('AL12').setValue('=(AK10-AK12)-AJ12').setNumberFormat("0");
-  SpreadsheetApp.getActive().getSheetByName("REPORT").getRange('AJ14:AL14').setValue('=AH2');
-  SpreadsheetApp.getActive().getSheetByName("REPORT").getRange('AJ17').setValue('=(SUM(L:L))/AK10');
-  SpreadsheetApp.getActive().getSheetByName("REPORT").getRange('AK17').setValue('=AVERAGEIF(O:O,AN13,L:L)');
-  SpreadsheetApp.getActive().getSheetByName("REPORT").getRange('AL17').setValue('=AVERAGEIF(O:O,AN14,L:L)');
-  SpreadsheetApp.getActive().getSheetByName("REPORT").getRange('AJ19').setValue('=IFERROR(AVERAGEIF(R:R,AN13,R:R),0)');
-  SpreadsheetApp.getActive().getSheetByName("REPORT").getRange('AK19').setValue('=AVERAGEIF(P:P,AN13,P:P)');
-  SpreadsheetApp.getActive().getSheetByName("REPORT").getRange('AL19').setValue('=IFERROR(AVERAGEIF(P:P,AN14,P:P),0)');
-  SpreadsheetApp.getActive().getSheetByName("REPORT").getRange('AN13').setValue('>0');
-  SpreadsheetApp.getActive().getSheetByName("REPORT").getRange('AN14').setValue('<0');
-  SpreadsheetApp.getActive().getSheetByName("REPORT").getRange('AN15').setValue('0');
+  SpreadsheetApp.getActive().getSheetByName("GRAPH").getRange('AC3').setValue('=SUM(REPORT!R2:REPORT!R570)');
+  SpreadsheetApp.getActive().getSheetByName("GRAPH").getRange('AD3').setValue('=REPORT!AH2+REPORT!AC3');
+  SpreadsheetApp.getActive().getSheetByName("GRAPH").getRange('AE3').setValue('=(REPORT!AC3/REPORT!AH2)*1').setNumberFormat("00.00%");
+  SpreadsheetApp.getActive().getSheetByName("GRAPH").getRange('AC6').setValue('=AVERAGE(REPORT!G2:REPORT!G570)').setNumberFormat("hh:mm");
+  SpreadsheetApp.getActive().getSheetByName("GRAPH").getRange('AD6').setValue('=IFERROR(AVERAGEIFS(REPORT!G2:REPORT!G570,REPORT!R2:REPORT!R570,">0"),0)').setNumberFormat("hh:mm");
+  SpreadsheetApp.getActive().getSheetByName("GRAPH").getRange('AE6').setValue('=IFERROR(AVERAGEIFS(REPORT!G2:REPORT!G570,REPORT!R2:REPORT!R570,"<0"),0)').setNumberFormat("hh:mm");
+  SpreadsheetApp.getActive().getSheetByName("GRAPH").getRange('AE8').setValue('=REPORT!AC12/REPORT!AD10*1').setNumberFormat("##.##%");
+  SpreadsheetApp.getActive().getSheetByName("GRAPH").getRange('AC8').setValue('=1-REPORT!AE8').setNumberFormat("##.##%");
+  SpreadsheetApp.getActive().getSheetByName("GRAPH").getRange('AC10').setValue('=MAX(REPORT!O2:REPORT!O570)').setNumberFormat("00.00%");
+  SpreadsheetApp.getActive().getSheetByName("GRAPH").getRange('AD10').setValue('=COUNTA(REPORT!A2:REPORT!A570)-1').setNumberFormat("0");
+  SpreadsheetApp.getActive().getSheetByName("GRAPH").getRange('AE10').setValue('=MIN(REPORT!O2:REPORT!O570)').setNumberFormat("00.00%");
+  SpreadsheetApp.getActive().getSheetByName("GRAPH").getRange('AC12').setValue('=COUNTIF(REPORT!R2:REPORT!R570,REPORT!AN14)');
+  SpreadsheetApp.getActive().getSheetByName("GRAPH").getRange('AD12').setValue('=COUNTIF(REPORT!R2:REPORT!R570,REPORT!AN13)');
+  SpreadsheetApp.getActive().getSheetByName("GRAPH").getRange('AE12').setValue('=(REPORT!AD10-REPORT!AD12)-REPORT!AC12').setNumberFormat("0");
+  SpreadsheetApp.getActive().getSheetByName("GRAPH").getRange('AC14:AE14').setValue('=REPORT!AH2');
+  SpreadsheetApp.getActive().getSheetByName("GRAPH").getRange('AC17').setValue('=(SUM(REPORT!L2:REPORT!L570))/REPORT!AD10');
+  SpreadsheetApp.getActive().getSheetByName("GRAPH").getRange('AD17').setValue('=AVERAGEIF(REPORT!O2:REPORT!O570,REPORT!AN13,REPORT!L2:REPORT!L570)');
+  SpreadsheetApp.getActive().getSheetByName("GRAPH").getRange('AE17').setValue('=AVERAGEIF(REPORT!O2:REPORT!O570,REPORT!AN14,REPORT!L2:REPORT!L570)');
+  SpreadsheetApp.getActive().getSheetByName("GRAPH").getRange('AC19').setValue('=IFERROR(AVERAGEIF(REPORT!R2:REPORT!R570,REPORT!AN13,REPORT!R2:REPORT!R570),0)');
+  SpreadsheetApp.getActive().getSheetByName("GRAPH").getRange('AD19').setValue('=AVERAGEIF(REPORT!P2:REPORT!P570,REPORT!AN13,REPORT!P2:REPORT!P570)');
+  SpreadsheetApp.getActive().getSheetByName("GRAPH").getRange('AE19').setValue('=IFERROR(AVERAGEIF(REPORT!P2:REPORT!P570,REPORT!AN14,REPORT!P2:REPORT!P570),0)');
+  SpreadsheetApp.getActive().getSheetByName("GRAPH").getRange('AN13').setValue('>0');
+  SpreadsheetApp.getActive().getSheetByName("GRAPH").getRange('AN14').setValue('<0');
+  SpreadsheetApp.getActive().getSheetByName("GRAPH").getRange('AN15').setValue('0');
 
 var sheet = SpreadsheetApp.getActiveSpreadsheet();
 var filename = "All Positions Report";
@@ -80,7 +80,6 @@ SpreadsheetApp.getActiveSheet().getRange('AI2').setValue('sent');
 
 // this will send the user email + link to mongo server
 function sendLink(){
-
 var sheet = SpreadsheetApp.getActiveSpreadsheet();
 var filename = "All Positions Report";
 const userEmail = SpreadsheetApp.getActive().getSheetByName("REPORT").getRange('AI2').getValue();
@@ -88,7 +87,7 @@ var MyNewBook = sheet.copy(filename).addViewer(userEmail).getUrl();
 
 if(userEmail == "sent") return;
 
-var url = 'https://empty-cameras-watch.loca.lt/reports/savelink';
+var url = 'https://short-cars-invite.loca.lt/reports/savelink';
 
 var jsonData = {
   "userEmail": userEmail,
@@ -113,4 +112,6 @@ function doSomethings() {
   if(userEmail == "sent") return;
   sendEmail();
 }
+
+
 
